@@ -3,10 +3,10 @@ import React from "react"
 function App() {
 
   return (
-    <>
-    <h1  className='text-red-500'>i am a recat project</h1>
+    <div className="min-h-screen bg-gray-50 text-gray-900">
+       
       
-    </>
+    </div>
   )
 }
 
