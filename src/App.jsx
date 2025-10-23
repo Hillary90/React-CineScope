@@ -1,6 +1,7 @@
 import React from "react"
 import NavBar from "./components/NavBar";
-import Homepage from "./utility/pages/Homepage";
+import Homepage from "./pages/Homepage";
+
 
 
 function App() {
