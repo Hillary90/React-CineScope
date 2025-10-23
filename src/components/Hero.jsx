@@ -36,17 +36,36 @@ fetch('https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1', optio
   }
   return(
     <div className="text-white relative " >
-      <img src={`https:image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt="" className="w-full rounded-2xl h-[600px] object-center object-fill" />
-      <div className="flex space-x-2 md:space-x-4  left-4 bottom-3 absolute md:bottom-8 md:left-10 font-medium">
 
-        <button className=" flex justify-center items-center bg-white hover:bg-gray-200 text-red-500 py-3 px-4 rounded-full cursor-pointer text-sm md:text-base "> 
-         <i className=" mr-1 w-5 h-4 fa-solid fa-bookmark"></i> 
+      <img src={`https:image.tmdb.org/t/p/original/${movie.backdrop_path}`} 
+        alt="" className="w-full rounded-2xl 
+        h-[600px] object-center object-fill" 
+
+      />
+      <div className="flex space-x-2 md:space-x-4 
+        left-4 bottom-3 absolute 
+        md:bottom-8 md:left-10 font-medium"
+       >
+
+        <button className=" flex justify-center items-center
+          bg-white hover:bg-gray-200
+          text-red-500 py-3 px-4 rounded-full 
+          cursor-pointer text-sm md:text-base 
+          "> 
+         <i 
+           className=" mr-1 w-5 h-4 fa-solid fa-bookmark">
+         </i> 
          Save For Later
         </button>
 
-        <button className="flex justify-center items-center bg-red-500 hover:bg-red-500 text-white py-3
-         px-4 rounded-full cursor-pointer text-sm md:text-base"> 
-         <i className=" mr-1 fa-solid fa-play"></i> 
+        <button className="flex justify-center 
+         items-center bg-red-500
+         hover:bg-red-500 text-white py-3
+         px-4 rounded-full cursor-pointer text-sm md:text-base"
+         > 
+         <i 
+           className=" mr-1 fa-solid fa-play">
+         </i> 
          Watch Now
         </button>
       </div>
