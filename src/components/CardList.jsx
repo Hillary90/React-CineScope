@@ -1,64 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CardImage from '../assets/CardImage.jpg'
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"; 
 
 
-function CardList() {
-  const data = [
-    {
-      id: 1,
-      title: 'Card1',
-      description: 'Description for card 1',
-      imageUrl: 'https://via.placeholder.com/150',
+function CardList({title, category}) {
 
-    },
-    {
-      id: 2,
-      title: 'Card2',
-      description: 'Description for card 1',
-      imageUrl: 'https://via.placeholder.com/150',
+  // state used to store fetched movie data
+  const [data, setData] = useState([])
+  // API request options, including authentication header
+  const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMTQxODRiNTBiOTU1OGU4MDNhZmRjMzVmMGYzZjQzMSIsIm5iZiI6MTc2MTEyNDM1MS4xOTUwMDAyLCJzdWIiOiI2OGY4OWZmZjMxMzcyMWI4YmFkM2JhMTIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.upbQEtMo6F0LqJZ2MfyAHnSS9XZJGqxshwFeu2jloQo'
+  }
+};
+  
+  // useEffect runs once when the component mounts to fetch movie data
+  useEffect(()=>{
 
-    },
-    {
-      id: 3,
-      title: 'Card3',
-      description: 'Description for card 1',
-      imageUrl: 'https://via.placeholder.com/150',
+    fetch(
+      `https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1`, options
+    )
+    .then(res => res.json())
+    .then(res => setData(res.results)  
+    //console.log(res)
 
-    },
-    {
-      id: 4,
-      title: 'Card4',
-      description: 'Description for card 1',
-      imageUrl: 'https://via.placeholder.com/150',
+    )
+    .catch(err => console.error(err));
 
-    },
-    {
-      id: 5,
-      title: 'Card5',
-      description: 'Description for card 1',
-      imageUrl: 'https://via.placeholder.com/150',
+  }, []) // empty dependancy that runs only onces when mounted 
 
-    },
-    {
-      id: 6,
-      title: 'Card6',
-      description: 'Description for card 1',
-      imageUrl: 'https://via.placeholder.com/150',
 
-    }
-  ]
   return(
     <div  className="text-white md:px-4 bg-gray-900">
-      <h2 className="pt-10 pb-5 text-lg font-medium">Upcoming</h2>
+      <h2 className="pt-10 pb-5 text-lg font-medium">{title}</h2>
 
       <Swiper slidepreview={'auto'} spaceBetween={10} className="mySwiper">
         {data.map((item, index) => 
 
         <SwiperSlide key={index} className="max-w-70" >
-          <img src={CardImage} alt="" className="h-45 w-full object-cover object-center" />
-          <p className="text-center pt-2 ">A very good movie</p>
+          <img src={`https://image.tmdb.org/t/p/w500/${item.backdrop_path}`} alt="" className="h-45 w-full object-cover object-center" />
+          <p className="text-center pt-2 ">{item.original_title}</p>
         </SwiperSlide>
       )}
       </Swiper>

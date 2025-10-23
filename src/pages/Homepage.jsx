@@ -9,7 +9,11 @@ function Homepage() {
   return(
     <div className="p-4">
       <Hero />
-      <CardList />
+      <CardList title="Now Playing" category={"now_playing"}/>
+      <CardList title="Top Rated" category={"top_rated"} />
+      <CardList title="Popular" category={"popular"} />
+      <CardList title="UPcoming" category={"upcoming"} />
+
       <Footer/>
     </div>    
 
