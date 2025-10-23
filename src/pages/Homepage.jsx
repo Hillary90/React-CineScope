@@ -1,6 +1,7 @@
 import React from "react";
 import Hero from "../components/Hero";
-import CardList from "./CardList";
+import CardList from "../components/CardList";
+
 
 
 function Homepage() {
