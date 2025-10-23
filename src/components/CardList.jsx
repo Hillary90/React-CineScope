@@ -53,7 +53,7 @@ function CardList() {
     <div  className="text-white md:px-4 bg-gray-900">
       <h2 className="pt-10 pb-5 text-lg font-medium">Upcoming</h2>
 
-      <Swiper slidePreView={'auto'} spaceBetween={10} className="mySwiper">
+      <Swiper slidepreview={'auto'} spaceBetween={10} className="mySwiper">
         {data.map((item, index) => 
 
         <SwiperSlide key={index} className="max-w-70" >
