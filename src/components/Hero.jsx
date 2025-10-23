@@ -27,9 +27,9 @@ fetch('https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1', optio
     }
   })  //console.log(res)
   .catch(err => console.error(err));
-},[]) // empty dependancy to ensure it runs only once
+},[]) // empty dependency to ensure it runs only once
   
-   // conditinal rendering to show if the movie data hasn't loaded yet, display a loading message 
+   // conditional rendering to show if the movie data hasn't loaded yet, display a loading message 
    // if the movie
   if(!movie){
     return <p>Loading....</p>

@@ -30,7 +30,7 @@ function CardList({title, category}) {
     )
     .catch(err => console.error(err));
 
-  }, []) // empty dependancy that runs only onces when mounted 
+  }, []) // empty dependency that runs only onces when mounted 
 
 
   return(
