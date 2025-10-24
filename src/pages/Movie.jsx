@@ -21,6 +21,7 @@ function Movie() {
       .catch((err) => console.error(err));
   }, [id]);
 
+  // conditional rendering to show if the movie data hasn't loaded yet, display a loading message
   if (!movie) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -28,6 +29,8 @@ function Movie() {
       </div>
     );
   }
+
+  console.log(movie) // so as to get the movie data
 
   return (
     <div className="min-h-screen bg-gray-800 text-white">
@@ -39,7 +42,6 @@ function Movie() {
           backgroundPosition: "center",
         }}
       >
-        {/* Dark overlay for better text contrast */}
         <div className="absolute inset-0 bg-black/60"></div>
 
         <div className="absolute bottom-8 flex items-end z-10 p-8 gap-7">
@@ -50,7 +52,9 @@ function Movie() {
           />
 
           <div>
-            <h1 className="text-4xl font-bold mb-2">{movie.title}</h1>
+            <h1 className="text-4xl font-bold mb-2">
+             {movie.title}
+            </h1>
 
             <div className="flex items-center mb-2 gap-4 text-gray-300">
               <span>
@@ -66,24 +70,84 @@ function Movie() {
               {movie.genres?.map((genre) => (
                 <span
                   key={genre.id}
-                  className="bg-gray-700/80 text-gray-100 px-3 py-1 rounded-full text-sm"
+                  className="bg-gray-700/80 text-gray-100 
+                  px-3 py-1 rounded-full text-sm"
                 >
                   {genre.name}
                 </span>
               ))}
             </div>
-            
+
             <p className="text-gray-200 max-w-2xl mb-6 leading-relaxed">
               {movie.overview}
             </p>
 
             <button
-              className="flex items-center bg-red-600 text-white font-semibold 
-              py-3 px-6 rounded-full hover:bg-red-700 transition-all duration-300 
+              className="flex items-center bg-red-600
+             text-white font-semibold py-3 px-6 rounded-full
+              hover:bg-red-700 transition-all duration-300 
               shadow-lg hover:shadow-red-700/30"
             >
               <i className="fa-solid fa-play mr-2"></i> Watch Now
             </button>
+          </div>
+        </div>
+      </div>
+      <div className="p-10 m-2">
+         <h2 className="text-2xl font-semibold mb-5">Details</h2>
+         <div className="bg-gray-700 rounded-lg shadow-lg p-5 flex-col md:flex-row gap-8">
+          <div className="flex-1">
+
+            <ul className="text-gray-400 space-x-2.5 ">
+              <li className="p-0.5">
+                <span className="text-white font-medium">Title: </span>
+                <span className="ml-1.5">{movie.title}</span>
+              </li>
+
+              <li className="p-0.5">
+                <span className="text-white font-medium">TagLine: </span>
+                <span className="ml-1.5 italic">{movie.tagline}</span>
+              </li>
+
+              <li className="p-0.5">
+                <span className="text-white font-medium">Status: </span>
+                <span className="ml-1.5">{movie.status}</span>
+              </li>
+
+              <li className="p-0.5">
+                <span className="text-white font-medium">Release Date: </span>
+                <span className="ml-1.5">{movie.release_date}</span>
+              </li>
+
+              <li className="p-0.5">
+                <span className="text-white font-medium">Original Language: </span>
+                <span className="ml-1.5">{movie.original_language.toUpperCase()}</span>
+              </li>
+
+
+              <li className="p-1">
+                <span className="text-white font-medium">Production Country: </span>
+                <span className="ml-1.5">
+                 {movie.production_countries.map((country)=> 
+                  country.name).join(', ')
+                 }
+                </span>
+              </li>   
+
+              <li className="p-1">
+                <span className="text-white font-medium">Production Company: </span>
+                <span className="ml-1.5">
+                 {movie.production_companies.map((company)=> 
+                  company.name).join(', ')
+                 }
+                </span>
+              </li> 
+
+              <li className="p-1">
+                <span className="text-white font-medium">Vote Average: </span>
+                <span className="ml-1.5">{movie.vote_average}</span>
+              </li> 
+            </ul>
           </div>
         </div>
       </div>
