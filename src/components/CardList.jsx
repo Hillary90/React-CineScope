@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CardImage from '../assets/CardImage.jpg'
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Link } from 'react-router'
 import "swiper/css"; 
 
 
@@ -41,8 +42,11 @@ function CardList({title, category}) {
         {data.map((item, index) => 
 
         <SwiperSlide key={index} className="max-w-70" >
-          <img src={`https://image.tmdb.org/t/p/w500/${item.backdrop_path}`} alt="" className="h-45 w-full object-cover object-center" />
+          <Link to={`/movie/${item.id}`} >
+            <img src={`https://image.tmdb.org/t/p/w500/${item.backdrop_path}`} alt="" className="h-45 w-full object-cover object-center" />
           <p className="text-center pt-2 ">{item.original_title}</p>
+          </Link>
+          
         </SwiperSlide>
       )}
       </Swiper>

@@ -53,6 +53,7 @@ fetch('https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1', optio
               via-orange-400 to-yellow-300 animate-pulse">
               Frame Tells a Story
             </span>
+                     
          </h1>
           <p className="mt-4 text-lg md:text-xl text-gray-200 max-w-2xl">
             Explore trending films, get personalized recommendations, and never
