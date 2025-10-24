@@ -2,18 +2,19 @@ import React from "react"
 import NavBar from "./components/NavBar";
 import Homepage from "./pages/Homepage";
 import { Route, Routes } from "react-router";
+import Movie from "./pages/Movie";
 
 
 
 function App() {
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900">
+    <div className="min-h-screen bg-gray-800 text-white">
        <NavBar />
        
        <Routes >
-          <Route path="/" element={<Homepage />}/>
-          <Route path="/movie/:id" element={<p>this is movie pasge</p>}/>
+          <Route path={"/"} element={<Homepage />}/>
+          <Route path={"/movie/:id"} element={<Movie />}/>
        </Routes>
     </div>
   )
