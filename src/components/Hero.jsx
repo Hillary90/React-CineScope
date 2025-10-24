@@ -14,7 +14,7 @@ function Hero() {
   }
 };
 
-{/* using the useEffect to from the API only once and the useEffect runs only after component mounts */}
+// using the useEffect to from the API only once and the useEffect runs only after component mounts 
 useEffect(()=> {
 fetch('https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1', options)
   .then(res => res.json())
@@ -35,39 +35,46 @@ fetch('https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1', optio
     return <p>Loading....</p>
   }
   return(
-    <div className="text-white relative " >
-
-      <img src={`https:image.tmdb.org/t/p/original/${movie.backdrop_path}`} 
-        alt="" className="w-full rounded-2xl 
-        h-[600px] object-center object-fill" 
-
+    <div className="relative w-full text-white">
+    
+      <img
+        src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+        alt={movie.title}
+        className="w-full h-[600px] object-cover rounded-2xl brightness-75"
       />
-      <div className="flex space-x-2 md:space-x-4 
-        left-4 bottom-3 absolute 
-        md:bottom-8 md:left-10 font-medium"
-       >
 
-        <button className=" flex justify-center items-center
-          bg-white hover:bg-gray-200
-          text-red-500 py-3 px-4 rounded-full 
-          cursor-pointer text-sm md:text-base 
-          "> 
-         <i 
-           className=" mr-1 w-5 h-4 fa-solid fa-bookmark">
-         </i> 
-         Save For Later
-        </button>
+      <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-12 lg:px-20 space-y-6">
+        <div>
 
-        <button className="flex justify-center 
-         items-center bg-red-500
-         hover:bg-red-500 text-white py-3
-         px-4 rounded-full cursor-pointer text-sm md:text-base"
-         > 
-         <i 
-           className=" mr-1 fa-solid fa-play">
-         </i> 
-         Watch Now
-        </button>
+          <h1 className="text-4xl md:text-6xl       font-extrabold leading-tight   tracking-tight">
+           Where Every{" "}
+           <span className="block text-transparent 
+              bg-clip-text bg-gradient-to-r from-red-500
+              via-orange-400 to-yellow-300 animate-pulse">
+              Frame Tells a Story
+            </span>
+         </h1>
+          <p className="mt-4 text-lg md:text-xl text-gray-200 max-w-2xl">
+            Explore trending films, get personalized recommendations, and never
+            miss a great movie again.
+          </p>
+        </div>
+
+        <div className="flex space-x-4 mt-6">
+          <button
+            className="flex items-center bg-white text-red-500 font-semibold 
+              py-3 px-6 rounded-full hover:bg-gray-200 transition-all"
+          >
+            <i className="fa-solid fa-bookmark mr-2"></i> Save For Later
+          </button>
+
+          <button
+            className="flex items-center bg-red-600 text-white font-semibold 
+              py-3 px-6 rounded-full hover:bg-red-700 transition-all"
+          >
+            <i className="fa-solid fa-play mr-2"></i> Watch Now
+          </button>
+        </div>
       </div>
     </div>
   );
