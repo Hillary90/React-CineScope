@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import HeroImage from '../assets/HeroImage.jpg'
 import {  useEffect } from 'react'
+import { Link } from 'react-router-dom'
 function Hero() {
 
   //state to store movie data 
@@ -68,13 +69,15 @@ fetch('https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1', optio
           >
             <i className="fa-solid fa-bookmark mr-2"></i> Save For Later
           </button>
-
-          <button
-            className="flex items-center bg-red-600 text-white font-semibold 
+          <Link to={`/movie/${movie.id}`}>
+             <button
+              className="flex items-center bg-red-600 text-white font-semibold 
               py-3 px-6 rounded-full hover:bg-red-700 transition-all"
-          >
-            <i className="fa-solid fa-play mr-2"></i> Watch Now
-          </button>
+            >
+              <i className="fa-solid fa-play mr-2"></i> Watch Now
+            </button>
+          </Link>
+          
         </div>
       </div>
     </div>
