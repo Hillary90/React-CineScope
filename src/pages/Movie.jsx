@@ -8,6 +8,7 @@ function Movie() {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [recommendations, setRecommendations] = useState([]);
+  const [trailer, setTrailer] = useState(null);
 
   const options = {
     method: "GET",
@@ -33,6 +34,35 @@ function Movie() {
       .then((res) => res.json())
       .then((res) => setRecommendations(res.results || []))
       .catch((err) => console.error(err));
+
+   fetch(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`, options)
+  .then(res => res.json())
+  .then(res => {
+    if (!res.results || res.results.length === 0) {
+      setTrailer(null);
+      return;
+    }
+
+    // Try to find the official trailer first
+    const officialTrailer = res.results.find(
+      (video) =>
+        video.site === "YouTube" &&
+        video.type === "Trailer" &&
+        video.official === true
+    );
+
+    // If the movie trailer is not found, yo will have to try any YouTube trailer or teaser
+    const backupTrailer = res.results.find(
+      (video) =>
+        video.site === "YouTube" &&
+        (video.type === "Trailer" || video.type === "Teaser")
+    );
+
+    const selected = officialTrailer || backupTrailer;
+    setTrailer(selected ? selected.key : null);
+  })
+  .catch(err => console.error(err));
+
   }, [id]);
 
   useEffect(() => {
@@ -108,12 +138,37 @@ function Movie() {
             <p className="text-gray-200 max-w-2xl mb-6 leading-relaxed">
               {movie.overview}
             </p>
+            {/* 
+              Conditional rendering:
+              If a trailer exists, it shows a clickable "Watch Trailer" button and linking takes you to YouTube.
+              Otherwise, if trailer isn't available a disable button appear showing Trailer not found.
+           */}
 
-            <button
-              className="flex items-center bg-red-600 text-white font-semibold py-3 px-6 rounded-full hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-red-700/30"
-            >
-              <i className="fa-solid fa-play mr-2"></i> Watch Now
-            </button>
+            {trailer ? (
+             <Link to={`https://www.youtube.com/watch?v=${trailer}`} target="_blank">
+               <button className="flex items-center
+                  bg-red-600 text-white 
+                  font-semibold py-3 px-6 rounded-full
+                  hover:bg-red-700 transition-all 
+                  duration-300 shadow-lg hover:shadow-red-700/30"
+                >
+                  <i 
+                    className="fa-solid fa-play mr-2">
+                  </i> 
+                  Watch Trailer
+               </button>
+              </Link>) :
+             (
+              <button
+                disabled
+                className="flex items-center bg-gray-600 text-white font-semibold py-3 px-6 rounded-full opacity-60 cursor-not-allowed"
+              >
+                <i className="fa-solid fa-ban mr-2">
+
+                </i> 
+                Trailer Not Available
+              </button>
+            )}         
           </div>
         </div>
       </div>
@@ -127,7 +182,7 @@ function Movie() {
 
         <div className="bg-gray-700 rounded-lg shadow-lg p-6 flex-col md:flex-row gap-8">
           <div className="flex-1">
-            {/*diplay movie Title from the tmdb*/}
+            {/*display movie Title from the tmdb*/}
             <ul className="text-gray-400 space-y-3">
               <li className="flex items-center gap-2">
                 <Film className="w-5 h-5 text-red-400" />
@@ -186,7 +241,7 @@ function Movie() {
                     .join(", ")}
                 </span>
               </li>
-              
+
               {/*display  vote_average of the move form tmdb*/}
               <li className="flex items-center gap-2">
                 <Star className="w-5 h-5 text-yellow-500" />

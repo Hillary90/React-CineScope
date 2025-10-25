@@ -2,24 +2,18 @@ import React, { useState } from "react";
 import HeroImage from '../assets/HeroImage.jpg'
 import {  useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import requests from "../utility/Request";
+
 function Hero() {
 
   //state to store movie data 
   const [movie,setMovie] = useState(null)
   
-  const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMTQxODRiNTBiOTU1OGU4MDNhZmRjMzVmMGYzZjQzMSIsIm5iZiI6MTc2MTEyNDM1MS4xOTUwMDAyLCJzdWIiOiI2OGY4OWZmZjMxMzcyMWI4YmFkM2JhMTIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.upbQEtMo6F0LqJZ2MfyAHnSS9XZJGqxshwFeu2jloQo'
-  }
-};
-
-// using the useEffect to from the API only once and the useEffect runs only after component mounts 
-useEffect(()=> {
-fetch('https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1', options)
-  .then(res => res.json())
-  .then(res => {
+// using the useEffect to fetch the API only once and the useEffect runs only after component mounts 
+   useEffect(()=> {
+   fetch(requests.requestUpcoming)
+   .then(res => res.json())
+   .then(res => {
     if (res.results && res.results.length > 0) {
       // using random number to get the index of the results instead of passing the setMovie an array
       const randomIndex = Math.floor(Math.random()* res.results.length)

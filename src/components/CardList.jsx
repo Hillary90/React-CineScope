@@ -5,33 +5,23 @@ import { Link } from 'react-router'
 import "swiper/css"; 
 
 
-function CardList({title, category}) {
+function CardList({title, fetchUrl}) {
 
   // state used to store fetched movie data
-  const [data, setData] = useState([])
-  // API request options, including authentication header
-  const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMTQxODRiNTBiOTU1OGU4MDNhZmRjMzVmMGYzZjQzMSIsIm5iZiI6MTc2MTEyNDM1MS4xOTUwMDAyLCJzdWIiOiI2OGY4OWZmZjMxMzcyMWI4YmFkM2JhMTIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.upbQEtMo6F0LqJZ2MfyAHnSS9XZJGqxshwFeu2jloQo'
-  }
-};
+  const [data, setData] = useState([]);
   
-  // useEffect runs once when the component mounts to fetch movie data
+  // useEffect runs once when the component mounts to fetch movie data from the fetchUrl passed in as a prop from the homepage component
   useEffect(()=>{
 
-    fetch(
-      `https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1`, options
-    )
+    fetch(fetchUrl)
     .then(res => res.json())
     .then(res => setData(res.results)  
-    //console.log(res)
+     //console.log(res)
 
     )
     .catch(err => console.error(err));
 
-  }, []) // empty dependency that runs only onces when mounted 
+  }, [fetchUrl]) // empty dependency that runs only onces when mounted 
 
 
   return(
@@ -43,7 +33,7 @@ function CardList({title, category}) {
 
         <SwiperSlide key={index} className="max-w-70" >
           <Link to={`/movie/${item.id}`} >
-            <img src={`https://image.tmdb.org/t/p/w500/${item.backdrop_path}`} alt="" className="h-45 w-full object-cover object-center" />
+            <img src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`} alt="" className="h-45 w-full object-cover object-center" />
           <p className="text-center pt-2 ">{item.original_title}</p>
           </Link>
           
