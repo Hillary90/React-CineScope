@@ -127,31 +127,36 @@ function Movie() {
 
         <div className="bg-gray-700 rounded-lg shadow-lg p-6 flex-col md:flex-row gap-8">
           <div className="flex-1">
+            {/*diplay movie Title from the tmdb*/}
             <ul className="text-gray-400 space-y-3">
               <li className="flex items-center gap-2">
                 <Film className="w-5 h-5 text-red-400" />
                 <span className="text-white font-medium">Title:</span>
                 <span className="ml-1.5">{movie.title}</span>
               </li>
-
+              
+               {/*display Tagline of the movie from tmdb*/}
               <li className="flex items-center gap-2">
                 <Type className="w-5 h-5 text-blue-400" />
                 <span className="text-white font-medium">Tagline:</span>
                 <span className="ml-1.5 italic">{movie.tagline}</span>
               </li>
-
+              
+              {/*display movie status of the movie form the tmdb*/}
               <li className="flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-green-400" />
                 <span className="text-white font-medium">Status:</span>
                 <span className="ml-1.5">{movie.status}</span>
               </li>
-
+              
+              {/*display release_date of the movie from tmdb*/}
               <li className="flex items-center gap-2">
                 <Calendar className="w-5 h-5 text-yellow-400" />
                 <span className="text-white font-medium">Release Date:</span>
                 <span className="ml-1.5">{movie.release_date}</span>
               </li>
 
+              {/*diplay original language of the movie from tmdb*/}
               <li className="flex items-center gap-2">
                 <Globe className="w-5 h-5 text-indigo-400" />
                 <span className="text-white font-medium">Original Language:</span>
@@ -160,6 +165,7 @@ function Movie() {
                 </span>
               </li>
 
+              {/*display production_countries of the movie from movie tmdb*/}
               <li className="flex items-center gap-2">
                 <MapPin className="w-5 h-5 text-teal-400" />
                 <span className="text-white font-medium">Production Country:</span>
@@ -170,6 +176,7 @@ function Movie() {
                 </span>
               </li>
 
+              {/*display production_companies of the movie form tmdb*/}
               <li className="flex items-center gap-2">
                 <Building2 className="w-5 h-5 text-purple-400" />
                 <span className="text-white font-medium">Production Company:</span>
@@ -179,7 +186,8 @@ function Movie() {
                     .join(", ")}
                 </span>
               </li>
-
+              
+              {/*display  vote_average of the move form tmdb*/}
               <li className="flex items-center gap-2">
                 <Star className="w-5 h-5 text-yellow-500" />
                 <span className="text-white font-medium">Vote Average:</span>
