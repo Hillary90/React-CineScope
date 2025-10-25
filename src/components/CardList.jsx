@@ -25,7 +25,7 @@ function CardList({title, fetchUrl}) {
 
 
   return(
-    <div  className="text-white md:px-4 bg-gray-900">
+    <div  className="text-white md:px-4">
       <h2 className="pt-10 pb-5 text-lg font-medium">{title}</h2>
 
       <Swiper slidepreview={'auto'} spaceBetween={10} className="mySwiper">
