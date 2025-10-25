@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Film, Type, CheckCircle, Calendar, Globe, Building2, Star, MapPin} from "lucide-react";
+import { FadeLoader } from "react-spinners";
 
 function Movie() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const options = {
     method: "GET",
@@ -22,12 +24,35 @@ function Movie() {
       .catch((err) => console.error(err));
   }, [id]);
 
+   useEffect(() => {
+    // Show loader for at least 1.5 seconds
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []); useEffect(() => {
+    // Show loader for at least 1.5 seconds
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   // conditional rendering to show if the movie data hasn't loaded yet, display a loading message
-  if (!movie) {
+  if ( loading || !movie) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <span className="text-2xl text-red-500">Loading....</span>
+      <div className="flex flex-col items-center justify-center h-screen bg-gray-900">
+      <div className="flex flex-col items-center">
+        <div className="bg-gray-800 p-6 rounded-2xl shadow-2xl flex flex-col items-center">
+          <FadeLoader color="#f43f5e" height={15} width={5} radius={2} margin={2} />
+          <p className="text-gray-300 mt-5 text-lg font-medium animate-pulse">
+            Loading movie details...
+          </p>
+        </div>
       </div>
+    </div>
     );
   }
 
