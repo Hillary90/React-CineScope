@@ -33,7 +33,7 @@ function CardList({title, fetchUrl}) {
 
         <SwiperSlide key={index} className="max-w-70" >
           <Link to={`/movie/${item.id}`} >
-            <img src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`} alt="" className="h-45 w-full object-cover object-center" />
+            <img src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`} alt="" className="h-45 w-full object-cover object-center rounded-2xl" />
           <p className="text-center pt-2 ">{item.original_title}</p>
           </Link>
           
