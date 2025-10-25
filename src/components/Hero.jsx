@@ -3,11 +3,13 @@ import HeroImage from '../assets/HeroImage.jpg'
 import {  useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import requests from "../utility/Request";
+import { FadeLoader } from "react-spinners";
 
 function Hero() {
 
   //state to store movie data 
   const [movie,setMovie] = useState(null)
+  const [loading, setLoading] = useState(true);
   
 // using the useEffect to fetch the API only once and the useEffect runs only after component mounts 
    useEffect(()=> {
@@ -23,11 +25,31 @@ function Hero() {
   })  //console.log(res)
   .catch(err => console.error(err));
 },[]) // empty dependency to ensure it runs only once
+
+  useEffect(() => {
+    // Show loader for at least 1.5 seconds
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
   
    // conditional rendering to show if the movie data hasn't loaded yet, display a loading message 
    // if the movie
-  if(!movie){
-    return <p>Loading....</p>
+  if(loading || !movie){
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-gray-900">
+        <div className="flex flex-col items-center">
+          <div className="bg-gray-800 p-6 rounded-2xl shadow-2xl flex flex-col items-center">
+            <FadeLoader color="#f43f5e" height={15} width={5} radius={2} margin={2} />
+            <p className="text-gray-300 mt-5 text-lg font-medium animate-pulse">
+              Loading....
+            </p>
+          </div>
+        </div>
+      </div>
+    )
   }
   return(
     <div className="relative w-full text-white">
