@@ -6,16 +6,18 @@ import Movie from "./pages/Movie";
 
 
 
+
 function App() {
 
   return (
     <div className="min-h-screen bg-gray-800 text-white">
        <NavBar />
        
-       <Routes >
+        <Routes >
           <Route path={"/"} element={<Homepage />}/>
           <Route path={"/movie/:id"} element={<Movie />}/>
-       </Routes>
+        
+        </Routes>
     </div>
   )
 }

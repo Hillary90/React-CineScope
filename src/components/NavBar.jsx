@@ -21,11 +21,15 @@ const Navbar = () => {
        </Link>
       
        <ul className='hidden xl:flex space-x-6'>
-           <li  className="cursor-pointer
+           <Link to={"/"}>
+            <li  className="cursor-pointer
              hover:text-red-500 transition" 
-             >
+            >
             Home
            </li>
+
+           </Link>
+           
            <li className="cursor-pointer
              hover:text-red-500 transition"
              >
@@ -83,12 +87,15 @@ const Navbar = () => {
         </button>
 
         {/*Sign in button */}
-        <button className='border border-bg-gray-800 
+        <Link to={'/signin'}>
+         <button className='border border-bg-gray-800 
           py-2.5 px-5 rounded-full 
           cursor-pointer'
           >
          SignIn
-        </button>
+        </button> 
+        </Link>
+       
        </div>
 
 
