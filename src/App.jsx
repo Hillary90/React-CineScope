@@ -3,6 +3,8 @@ import NavBar from "./components/NavBar";
 import Homepage from "./pages/Homepage";
 import { Route, Routes } from "react-router";
 import Movie from "./pages/Movie";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 
 
@@ -16,6 +18,8 @@ function App() {
         <Routes >
           <Route path={"/"} element={<Homepage />}/>
           <Route path={"/movie/:id"} element={<Movie />}/>
+          <Route path={"/signin"} element={<SignIn/>} />
+          <Route path={"/signup"} element={<SignUp />} />
         
         </Routes>
     </div>

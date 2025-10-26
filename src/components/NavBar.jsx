@@ -1,9 +1,21 @@
 import { Search } from 'lucide-react';
 import React from 'react'
 import { Link } from "react-router";
+import { useAuth } from '../context/AuthContext';
 
 
 const Navbar = () => {
+
+  const {user, logout } =useAuth(); 
+
+  // handle logout
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error("Logout failed:", error.message);
+    }
+  };
 
   return (
     <nav className="bg-gray-900 text-gray-200 
@@ -87,19 +99,29 @@ const Navbar = () => {
         </button>
 
         {/*Sign in button */}
-        <Link to={'/signin'}>
-         <button className='border border-bg-gray-800 
-          py-2.5 px-5 rounded-full 
-          cursor-pointer'
+        { user ? (
+          <button  
+           onClick={handleLogout}
+           className='border border-bg-gray-800 transition
+            py-2.5 px-5 rounded-full 
+           cursor-pointer'
           >
-         SignIn
-        </button> 
-        </Link>
-       
-       </div>
-
-
-    
+           Logout
+          </button> 
+        ) : (
+          // if not logged in show sign in
+          <Link to={"/signin"}> 
+            <button  
+             className='border border-bg-gray-800 transition
+             py-2.5 px-5 rounded-full 
+             cursor-pointer'
+            >
+              Sign In
+            </button>
+          </Link>
+          
+        )}              
+      </div>   
     </nav>
   );
 };
