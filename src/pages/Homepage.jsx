@@ -4,7 +4,7 @@ import CardList from "../components/CardList";
 import Footer from "../components/Footer";
 import requests from "../utility/Request";
 import GerneList from "../components/GerneList.";
-import TvShows from "../components/TvShows";
+
 
 
 function Homepage() {
@@ -16,8 +16,6 @@ function Homepage() {
       <CardList title="Top Rated" fetchUrl={requests.requestTopRated} />
       <CardList title="Popular Movies" fetchUrl={requests.requestPopular} />
       <CardList title="UpComing" fetchUrl={requests.requestUpcoming} />
-      <TvShows/>
- 
       <Footer/>
     </div>    
 

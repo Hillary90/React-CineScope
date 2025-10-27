@@ -15,7 +15,8 @@ export default function TvShows() {
   useEffect(() => {
     fetch(requests.requestTvShow)
       .then((r) => r.json())             // Convert response to JSON
-      .then((d) => setShows(d.results || [])) // Save TV show data or empty array if no results
+      .then((d) => 
+        setShows(d.results || [])) // Save TV show data or empty array if no results
       .catch((e) => console.error(e))    // Log any errors to the console
       .finally(() => setLoading(false)); // Stop loading when fetch is done
   }, []);

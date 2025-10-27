@@ -1,6 +1,6 @@
 import { Search } from 'lucide-react';
 import React from 'react'
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { useAuth } from '../context/AuthContext';
 
 
@@ -33,43 +33,47 @@ const Navbar = () => {
        </Link>
       
        <ul className='hidden xl:flex space-x-6'>
-           <Link to={"/"}>
+          <Link to={"/"}>
+
             <li  className="cursor-pointer
              hover:text-red-500 transition" 
             >
-            Home
-           </li>
+             Home
+            </li>
 
-           </Link>
-            <Link to={"/tv"}>
+          </Link>
 
-              <li className="cursor-pointer
-                hover:text-red-500 transition"
-              >
-               Tv Shows
-              </li>
+          <Link to={"/tv"}>
 
-            </Link>         
-          
-           <li className="cursor-pointer
-             hover:text-red-500 transition"
+             <li className="cursor-pointer
+               hover:text-red-500 transition"
              >
-            Anime
-           </li>
+              Tv Shows
+             </li>
+          </Link>         
+            
+          <Link to={"/anime"}>
+            <li className="cursor-pointer
+             hover:text-red-500 transition"
+            >
+             Anime
+             </li>
+          </Link>
+           
            <li className="cursor-pointer
              hover:text-red-500 transition" 
             >
-            Games
+             Games
            </li>
            <li className="cursor-pointer
              hover:text-red-500 transition"
             >
-            New & Popular
+             New & Popular
            </li>
            <li className="cursor-pointer
              hover:text-red-500 transition" 
             >
-            Upcoming
+             Upcoming
            </li>          
        </ul>
 

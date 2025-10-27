@@ -16,8 +16,6 @@ function CardList({title, fetchUrl}) {
     fetch(fetchUrl)
     .then(res => res.json())
     .then(res => setData(res.results)  
-     //console.log(res)
-
     )
     .catch(err => console.error(err));
 
