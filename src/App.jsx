@@ -5,8 +5,7 @@ import { Route, Routes } from "react-router";
 import Movie from "./pages/Movie";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-
-
+import TvShows from "./components/TvShows";
 
 
 function App() {
@@ -20,7 +19,7 @@ function App() {
           <Route path={"/movie/:id"} element={<Movie />}/>
           <Route path={"/signin"} element={<SignIn/>} />
           <Route path={"/signup"} element={<SignUp />} />
-        
+          <Route path={"/tv"} element={<TvShows/>}/>
         </Routes>
     </div>
   )

@@ -41,12 +41,16 @@ const Navbar = () => {
            </li>
 
            </Link>
-           
-           <li className="cursor-pointer
-             hover:text-red-500 transition"
-             >
-            Tv Shows
-           </li>
+            <Link to={"/tv"}>
+
+              <li className="cursor-pointer
+                hover:text-red-500 transition"
+              >
+               Tv Shows
+              </li>
+
+            </Link>         
+          
            <li className="cursor-pointer
              hover:text-red-500 transition"
              >
