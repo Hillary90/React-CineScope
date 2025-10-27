@@ -7,6 +7,8 @@ import GerneList from "../components/GerneList.";
 
 
 
+
+
 function Homepage() {
   return(
     <div className="p-4">

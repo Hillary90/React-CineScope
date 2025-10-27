@@ -59,17 +59,15 @@ const Navbar = () => {
              Anime
              </li>
           </Link>
-           
-           <li className="cursor-pointer
-             hover:text-red-500 transition" 
-            >
-             Games
-           </li>
-           <li className="cursor-pointer
-             hover:text-red-500 transition"
-            >
-             New & Popular
-           </li>
+          
+            <Link to={"/newandpopular"}>
+
+              <li className="cursor-pointer
+               hover:text-red-500 transition"
+              >
+               New & Popular
+              </li>
+            </Link>
            <li className="cursor-pointer
              hover:text-red-500 transition" 
             >

@@ -7,6 +7,8 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import TvShows from "./components/TvShows";
 import Anime from "./components/Anime";
+import NewAndPopular from "./components/NewAndPopular";
+
 
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
           <Route path={"/signup"} element={<SignUp />} />
           <Route path={"/tv"} element={<TvShows/>}/>
           <Route path="/anime" element={<Anime/>} />
+          <Route path="/newandpopular" element={<NewAndPopular />} />
+
         </Routes>
     </div>
   )
