@@ -9,7 +9,7 @@ import TvShows from "./components/TvShows";
 import Anime from "./components/Anime";
 import NewAndPopular from "./components/NewAndPopular";
 import SearchResults from "./components/SearchResults";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 
 
