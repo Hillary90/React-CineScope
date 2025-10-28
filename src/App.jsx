@@ -9,6 +9,7 @@ import TvShows from "./components/TvShows";
 import Anime from "./components/Anime";
 import NewAndPopular from "./components/NewAndPopular";
 import SearchResults from "./components/SearchResults";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 
@@ -20,13 +21,33 @@ function App() {
        
         <Routes >
           <Route path={"/"} element={<Homepage />}/>
-          <Route path={"/movie/:id"} element={<Movie />}/>
+          <Route path={"/movie/:id"} element={
+            <ProtectedRoute>
+              <Movie />
+            </ProtectedRoute>
+            }/>
           <Route path={"/signin"} element={<SignIn/>} />
           <Route path={"/signup"} element={<SignUp />} />
-          <Route path={"/tv"} element={<TvShows/>}/>
-          <Route path="/anime" element={<Anime/>} />
-          <Route path="/newandpopular" element={<NewAndPopular />} />
-          <Route path="/search/:query" element={<SearchResults/>} />
+          <Route path={"/tv"} element={
+            <ProtectedRoute>
+              <TvShows/>
+            </ProtectedRoute>
+          }/>
+          <Route path="/anime" element={
+            <ProtectedRoute>
+              <Anime/>
+            </ProtectedRoute>
+          } />
+          <Route path="/newandpopular" element={
+            <ProtectedRoute>
+              <NewAndPopular />
+            </ProtectedRoute>
+         } />
+          <Route path="/search/:query" element={
+            <ProtectedRoute>
+             <SearchResults/>
+            </ProtectedRoute>
+          } />
 
         </Routes>
     </div>
