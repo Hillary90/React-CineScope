@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { GetAIRecom } from "../Library/AI";
 
 
  const questions = [
@@ -50,6 +52,8 @@ export default function AiRecommendation() {
   // create an input and it going to update the input, and passing intialState from the user based on the question to usestate
   const [inputs, setInputs] = useState(initialState); 
   const [question, setQuestion] = useState(0); // set the intial question at 0 which will be the first question. it just tracks the question 
+  const [recommendation, setRecommendation] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
    const handleOption = (value) => {
     setInputs({ ...inputs, [questions[question].name]: value });
@@ -73,6 +77,64 @@ export default function AiRecommendation() {
     if (question > 0) {
       setQuestion(question - 1)      
     }
+  }
+
+  // handle ai recommendation geneation
+   const generateRecommendation = async () =>{
+    if (!inputs) {
+      toast("Please enter your input")
+    }
+    setIsLoading(true)
+
+    const userPrompt = `Given the bellow user inputs:
+    -Genre: ${inputs.genre}
+    -Mode: ${inputs.mood}
+    -Language: ${inputs.language}
+    -Decade: ${inputs.decade}
+    
+    Recommend 10 ${inputs.mood.toLowerCase()} ${
+      inputs.language}-language ${
+      inputs.genre.toLowerCase()} movies released in the ${
+      inputs.decade
+    } with a runtime between ${
+      inputs.length
+      }. 
+     Return the list as plain JSON array of movie titles only, No extra text, no explanations, no code blocks, no markdown, just the JSON array.
+
+     example:
+
+    [
+      "Movie Title 1",
+      "Movie Title 2",
+      "Movie Title 3",
+      "Movie Title 4",
+      "Movie Title 5",
+      "Movie Title 6",
+      "Movie Title 7",
+      "Movie Title 8",
+      "Movie Title 9",
+      "Movie Title 10"
+    ]`
+
+    const result = await GetAIRecom(userPrompt);
+
+    // set loading to false after receiving the results
+    setIsLoading(false)
+
+    if (result) {
+      const cleanedResult = result.replace(/```json\n/i,'').replace(/\n```/i,'');
+      try {
+        const recommendationArray = JSON.parse(cleanedResult);
+        setRecommendation(recommendationArray)
+        console.log(recommendationArray)
+      } catch (error) {
+        console.log(error)
+      }     
+        
+    } else {
+      toast.error("Failed to get Recommendations.");
+    }
+    
   }
 
   return(
@@ -123,13 +185,15 @@ export default function AiRecommendation() {
             >
             <button 
              onClick={handleBackQuestion}
+             disabled = {questions == 0}
              type="button" 
              className="px-4 py-2 rounded-2xl font-semibold border-2 
              transition text-white bg-red-600 hover:bg-red-700 cursor-pointer"
             >Back</button>
 
             <button 
-             onClick={()=> handleNextQuestion()}
+            disabled={!inputs[questions[question].name]}
+             onClick={question === questions.length - 1 ? generateRecommendation : handleNextQuestion}
              className="px-4 py-2 rounded-2xl font-semibold 
              border-2  transition text-white bg-red-600  hover:bg-red-700 cursor-pointer"
             >
