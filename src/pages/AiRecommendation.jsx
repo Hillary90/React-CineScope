@@ -207,7 +207,7 @@ export default function AiRecommendation() {
             <button
               onClick={handleBackQuestion}
               disabled={question === 0}
-              className="px-4 py-2 rounded-2xl font-semibold border-2 transition text-white bg-red-600 hover:bg-red-700 cursor-pointer disabled:opacity-40"
+              className="px-4 py-2 rounded-2xl font-semibold border-2 transition text-white bg-red-600 hover:bg-red-700 cursor-pointer :opacity-40"
             >
               Back
             </button>
@@ -219,7 +219,7 @@ export default function AiRecommendation() {
                   ? generateRecommendation
                   : handleNextQuestion
               }
-              className="px-4 py-2 rounded-2xl font-semibold border-2 transition text-white bg-red-600 hover:bg-red-700 cursor-pointer disabled:opacity-40"
+              className="px-4 py-2 rounded-2xl font-semibold border-2 transition text-white bg-red-600 hover:bg-red-700 cursor-pointer :opacity-40"
             >
               {
                 question === questions.length - 1 ?
