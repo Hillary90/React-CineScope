@@ -10,6 +10,7 @@ import Anime from "./components/Anime";
 import NewAndPopular from "./components/NewAndPopular";
 import SearchResults from "./components/SearchResults";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import AiRecommendation from "./pages/AiRecommendation";
 
 
 
@@ -28,6 +29,7 @@ function App() {
             }/>
           <Route path={"/signin"} element={<SignIn/>} />
           <Route path={"/signup"} element={<SignUp />} />
+          <Route path={"/ai-recommendation"} element={<AiRecommendation/>} />
           <Route path={"/tv"} element={
             <ProtectedRoute>
               <TvShows/>
