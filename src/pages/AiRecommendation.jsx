@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { GetAIRecom } from "../Library/AI";
+import MovieRecommendation from "../components/MovieRecommendation";
 
 
  const questions = [
@@ -79,7 +80,7 @@ export default function AiRecommendation() {
     }
   }
 
-  // handle ai recommendation geneation
+  // handle ai recommendation genetation upto 10 movies
    const generateRecommendation = async () =>{
     if (!inputs) {
       toast("Please enter your input")
@@ -138,69 +139,95 @@ export default function AiRecommendation() {
   }
 
   return(
-    <div 
-     className="relative 
-     w-full max-w-md mx-auto 
-     mt-30 bg-gray-900 rounded-2xl 
-     shadow-2xl border-gray-600 py-10 
-     px-8 m-4 flex flex-col  items-center min-h-[500px]"
-    >
-      <h2 className="text-white text-3xl font-black mb-8 text-center tracking-tight drop-shadow-lg">AI Movie Recommendation
-      </h2>
-
-      <div className="w-full flex items-center mb-8">
-         <div className=" flex-1 bg-gray-600 rounded-full overflow-hidden h-2">
-          <div className="h-full bg-red-500 transition-all duration-300" style={{ width: `${((question + 1) / questions.length) * 100}%`}}></div>
-         </div>
-        {/* claculating the number of question over lenght of question so that we can get fraction */}
-         <span className="ml-3 text-white text-sm font-semibold">{question + 1}/{questions.length}</span>
+   <div className="w-full min-h-screen bg-gray-800 text-white flex flex-col md:flex-row items-start justify-center gap-8 p-10">
+      <div className="w-full md:w-2/3">
+        {recommendation.length > 0 ? (
+          <>
+            <h3 className="text-2xl font-bold mb-6 text-red-400 text-center md:text-left">
+              Your AI-Powered Movie Recommendations
+            </h3>
+            <MovieRecommendation movieTitles={recommendation} />
+          </>
+        ) : (
+          <div className="text-gray-400 text-center md:text-left mt-10">
+            <p>No recommendations yet — complete the quiz to generate some!</p>
+          </div>
+        )}
       </div>
 
-      <div className="w-full flex flex-col flex-1">
-         <div className="mb-6 flex-1">
+      {/* --- AI Movie Recommendations */}
+      <div className="w-full md:w-[25%] bg-gray-900 rounded-2xl border-gray-700 py-10 mt-12 px-8 flex flex-col items-center">
+        <h2 className="text-white text-3xl font-black mb-8 text-center tracking-tight drop-shadow-lg">
+          AI Movie Recommendation
+        </h2>
+
+        {/* Progress bar */}
+        <div className="w-full flex items-center mb-8">
+          <div className="flex-1 bg-gray-600 rounded-full overflow-hidden h-2">
+            {/*calculate the width of the progress bar */}
+            <div
+              className="h-full bg-red-500 transition-all duration-300"
+              style={{
+                width: `${((question + 1) / questions.length) * 100}%`,
+              }}
+            ></div>
+          </div>
+          {/* claculating the number of question over lenght of question so that we can get fraction */}
+          <span className="ml-3 text-white text-sm font-semibold">
+            {question + 1}/{questions.length}
+          </span>
+        </div>
 
          {/* diplay the interation of the lables in the questions array */}
-          <h3 className="text-lg font-semibold text-white text-center mb-5 ">{questions[question].label}</h3>
-
-          <div className="grid grid-cols-1 gap-2.5">
+        <div className="w-full flex flex-col flex-1">
+          <div className="mb-6 flex-1">
+            <h3 className="text-lg font-semibold text-white text-center mb-5">
+              {questions[question].label}
+            </h3>
             {/* map through the options and display each button with a single option*/}
-              {questions [question].options.map((que) =>  (
-                <button 
-                 key= {que} 
-                 onClick={()=>  handleOption (que)}
-                 className= {`w-full py-3 rounded-2xl 
-                 transition font-semibold 
-                 text-base flex items-center justify-center 
-                 gap-2 focus:outline-none focus:ring-1 active:scale-90 duration-150 cursor-pointer 
-                 ${inputs[questions[question].name ] == que ?"bg-red-500  text-white" : "bg-gray-800 text-white hover:bg-red-700/80" }`}
+            <div className="grid grid-cols-1 gap-2.5">
+              {questions[question].options.map((opt) => (
+                <button
+                  key={opt}
+                  onClick={() => handleOption(opt)}
+                  className={`w-full py-3 rounded-2xl transition font-semibold text-base flex items-center justify-center gap-2 focus:outline-none focus:ring-1 active:scale-90 duration-150 cursor-pointer ${
+                    inputs[questions[question].name] === opt
+                      ? "bg-red-500 text-white"
+                      : "bg-gray-800 text-white hover:bg-red-700/80"
+                  }`}
                 >
-                 {que}
+                  {opt}
                 </button>
-              ))}     
-          </div>       
-         </div>
+              ))}
+            </div>
+          </div>
 
-           <div 
-             className=" flex justify-between items-center my-5"
+          {/* Navigation buttons */}
+          <div className="flex justify-between items-center my-5 w-full">
+            <button
+              onClick={handleBackQuestion}
+              disabled={question === 0}
+              className="px-4 py-2 rounded-2xl font-semibold border-2 transition text-white bg-red-600 hover:bg-red-700 cursor-pointer disabled:opacity-40"
             >
-            <button 
-             onClick={handleBackQuestion}
-             disabled = {questions == 0}
-             type="button" 
-             className="px-4 py-2 rounded-2xl font-semibold border-2 
-             transition text-white bg-red-600 hover:bg-red-700 cursor-pointer"
-            >Back</button>
-
-            <button 
-            disabled={!inputs[questions[question].name]}
-             onClick={question === questions.length - 1 ? generateRecommendation : handleNextQuestion}
-             className="px-4 py-2 rounded-2xl font-semibold 
-             border-2  transition text-white bg-red-600  hover:bg-red-700 cursor-pointer"
+              Back
+            </button>
+            {/*condtional rendering of the button*/}
+            <button
+              disabled={!inputs[questions[question].name]}
+              onClick={
+                question === questions.length - 1
+                  ? generateRecommendation
+                  : handleNextQuestion
+              }
+              className="px-4 py-2 rounded-2xl font-semibold border-2 transition text-white bg-red-600 hover:bg-red-700 cursor-pointer disabled:opacity-40"
             >
-             {/* condtional  rendering */}
-             {question === questions.length - 1 ? "Finish" : "Next"}
-             </button>
-           </div>
+              {
+                question === questions.length - 1 ?
+                "Finish"
+                : "Next"}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   )
