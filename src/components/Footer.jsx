@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="w-full bg-gray-900 text-gray-400 py-10 px-6 mt-auto">
+    <footer className="w-full text-gray-400 py-10 px-6 mt-auto">
       {/* Top border and container */}
       <div className="w-full border-t border-gray-700 pt-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:flex-wrap justify-between gap-10">
@@ -59,7 +59,7 @@ function Footer() {
           <div className="flex-1 min-w-[200px] text-center md:text-right text-sm flex flex-col justify-between">
             <p>&copy; {new Date().getFullYear()} CineScope. All rights reserved.</p>
             <p className="mt-2">
-              Built with <span className="text-[#ff0066]">♥</span> by Movie Lover
+              Built <span className="text-[#ff0066]"></span> by Movie Lover
             </p>
           </div>
         </div>
