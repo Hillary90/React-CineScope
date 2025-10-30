@@ -1,0 +1,56 @@
+name: Cinescope — React CI/CD Pipeline (Netlify)
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  cinescope_pipeline:
+    name: Build, Test, and Deploy Cinescope
+    runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: 20
+      BUILD_DIR: build
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint --if-present
+
+      - name: Test
+        run: npm test --if-present
+
+      - name: Build React app
+        run: npm run build
+
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli
+
+      - name: Trigger Netlify Build Hook
+        run: curl -X POST -d '{}' ${{ secrets.CINESCOPE_BUILD_HOOK }}
+        continue-on-error: false
+
+      - name: Direct Netlify Deploy
+        if: ${{ false }}
+        run: netlify deploy --prod --dir=${{ env.BUILD_DIR }} \
+          --auth=$NETLIFY_AUTH_TOKEN \
+          --site=$NETLIFY_SITE_ID
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
