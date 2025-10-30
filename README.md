@@ -46,58 +46,31 @@ Home Page
 
 ##  App Architecture
 
-### Folder Structure
+<details>
+<summary> Folder Structure</summary>
+
 
 REACT-CINESCOPE/
 ├── public/
 ├── src/
-│ ├── assets/ # Images and icons
-│ │ ├── CardImage.jpg
-│ │ ├── HeroImage.jpg
-│ │ ├── favicon.ico
-│ │ └── ...
-│ │
-│ ├── components/ # Reusable UI components
-│ │ ├── Anime.jsx
-│ │ ├── CardList.jsx
-│ │ ├── Footer.jsx
-│ │ ├── GenreList.jsx
-│ │ ├── Hero.jsx
-│ │ ├── MovieRecommendation.jsx
-│ │ ├── NavBar.jsx
-│ │ ├── NewAndPopular.jsx
-│ │ ├── SearchResults.jsx
-│ │ └── TvShows.jsx
-│ │
-│ ├── context/ # Global state management
-│ │ └── AuthContext.jsx
-│ │
-│ ├── firebase/ # Firebase configuration
-│ │ ├── firebase.js
-│ │
-│ ├── Library/ # AI logic and helper files
-│ │ └── AI.js
-│ │
-│ ├── pages/ # Main application pages
-│ │ ├── AIRecommendation.jsx
-│ │ ├── Homepage.jsx
-│ │ ├── Movie.jsx
-│ │ ├── SignIn.jsx
-│ │ └── SignUp.jsx
-│ │
-│ ├── routes/ # Route definitions
-│ ├── utility/ # Helper utilities
-│ │
-│ ├── App.jsx # Root component
-│ ├── index.css # Global styles
-│ └── main.jsx # App entry point
-│
-├── .github/workflows/
-│ └── cinescope-deploy.yml # GitHub Actions CI/CD workflow
-│
+│   ├── assets/        # Images, icons, favicon
+│   ├── components/    # Reusable UI components
+│   ├── context/       # Global state management
+│   ├── firebase/      # Firebase config
+│   ├── Library/       # AI logic and helper files
+│   ├── pages/         # Main app pages
+│   ├── routes/        # Route definitions
+│   ├── utility/       # Helper utilities
+│   ├── App.jsx        # Root component
+│   ├── index.css      # Global styles
+│   └── main.jsx       # Entry point
+├── .github/workflows/ # CI/CD pipeline
 ├── package.json
 ├── vite.config.js
 └── README.md
+
+</details>
+
 
 ## Setup and Installation
 
