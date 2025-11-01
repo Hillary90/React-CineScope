@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CardImage from '../assets/CardImage.jpg'
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import "swiper/css"; 
 
 

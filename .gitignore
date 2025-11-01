@@ -17,10 +17,12 @@ dist-ssr
 !.vscode/extensions.json
 .idea
 /biuld
-.env
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Ignore sensitive environment files
+.env
