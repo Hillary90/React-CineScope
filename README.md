@@ -6,7 +6,7 @@ CineScope lets users explore trending movies and TV shows, view genre-based list
 
 ## Live Link
 
-[CineScope on Netlify](https://cinescope-1.netlify.app/)
+[CineScope Live Link](https://hillary90.github.io/React-CineScope/)
 
 
 
