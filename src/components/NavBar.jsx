@@ -76,7 +76,15 @@ const NavBar = () => {
           >
            New & Popular
           </li>
-        </Link>        
+        </Link> 
+        <Link to={"/saved"}>
+          <li 
+           className="cursor-pointer
+           hover:text-red-500 transition"
+          > 
+           WatchList
+          </li>
+        </Link>       
       </ul>
 
        <div className='flex items-center space-x-4 relative'>

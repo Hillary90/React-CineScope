@@ -4,13 +4,16 @@ import {  useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import requests from "../utility/Request";
 import { FadeLoader } from "react-spinners";
+import { db } from "../firebase/firebase";
+import { useAuth } from "../context/AuthContext";
+import { doc, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
 
 function Hero() {
 
   //state to store movie data 
   const [movie,setMovie] = useState(null)
   const [loading, setLoading] = useState(true);
-  
+  const { user } = useAuth();
 // using the useEffect to fetch the API only once and the useEffect runs only after component mounts 
    useEffect(()=> {
    fetch(requests.requestUpcoming)
@@ -34,6 +37,44 @@ function Hero() {
 
     return () => clearTimeout(timer);
   }, []);
+  
+  // handle saved videos for later
+  const handleSaveForLater = async () => {
+
+    // conditional rendering if the not user it sends and alert to sign in
+    if (!user) {
+      alert("Please sign in to save movies!");
+      return;
+    }
+    
+    const userRef = doc(db, "users", user.uid);
+
+    try {
+      // try to update the user's "savedMovies" array in Firestore
+      // If the document already exists, add the new movie without overwriting the others
+      await updateDoc(userRef, {
+        savedMovies: arrayUnion({
+          id: movie.id,
+          title: movie.title,
+          backdrop_path: movie.backdrop_path,
+        }),
+      });
+      alert(` "${movie.title}" saved for later!`); // send an alert if the movie is saved 
+    } catch (error) {
+
+      // acts as fall back if the user does not exits
+      await setDoc(userRef, {
+        savedMovies: [
+          {
+            id: movie.id,
+            title: movie.title,
+            backdrop_path: movie.backdrop_path,
+          },
+        ],
+      });
+      alert(` "${movie.title}" saved for later!`);  // sends an alert if movie is saved
+    }
+  };
   
    // conditional rendering to show if the movie data hasn't loaded yet, display a loading message 
    // if the movie
@@ -80,6 +121,7 @@ function Hero() {
 
         <div className="flex space-x-4 mt-6">
           <button
+            onClick={handleSaveForLater}
             className="flex items-center bg-white text-red-500 font-semibold 
               py-3 px-6 rounded-full hover:bg-gray-200 transition-all"
           >

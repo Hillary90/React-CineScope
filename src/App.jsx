@@ -11,6 +11,7 @@ import NewAndPopular from "./components/NewAndPopular";
 import SearchResults from "./components/SearchResults";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import AiRecommendation from "./pages/AiRecommendation";
+import SavedMovies from "./pages/SavedMovies";
 
 
 
@@ -50,6 +51,14 @@ function App() {
              <SearchResults/>
             </ProtectedRoute>
           } />
+          <Route
+          path="/saved" 
+          element={
+            <ProtectedRoute>
+              <SavedMovies />
+            </ProtectedRoute>
+          }
+        />
 
         </Routes>
     </div>
