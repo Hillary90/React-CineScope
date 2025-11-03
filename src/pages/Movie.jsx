@@ -145,7 +145,10 @@ function Movie() {
            */}
 
             {trailer ? (
-             <Link to={`https://www.youtube.com/watch?v=${trailer}`} target="_blank">
+              <a 
+               href= {`https://www.youtube.com/watch?v=${trailer}`} 
+               target="_blank"
+              >
                <button className="flex items-center
                   bg-red-600 text-white 
                   font-semibold py-3 px-6 rounded-full
@@ -157,7 +160,7 @@ function Movie() {
                   </i> 
                   Watch Trailer
                </button>
-              </Link>) :
+              </a>) :
              (
               <button
                 disabled
